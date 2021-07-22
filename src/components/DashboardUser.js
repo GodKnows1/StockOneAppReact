@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import YourProfile from './User/YourProfile';
+import UserIPO from './User/UserIPO';
+
 
 function DashboardUser() {
     const [comp, setComp] = useState('');
@@ -13,7 +15,7 @@ function DashboardUser() {
                 <div>
                     <center>
                     <div>
-                        <button>IPOs Tab</button>
+                        <button onClick={function () { setComp('IPO') }}>IPOs Tab</button>
                         <span>  </span>
                         <button>Companies Tab</button>
                         <span>  </span>
@@ -24,14 +26,18 @@ function DashboardUser() {
                         <button>Logout</button>
                     </div>
                     </center><br></br>
-                    <div id="wrap">
+                    <div >
+                        <div id="wrap">
                         {comp === 'Profile' && (
                             <YourProfile />
                         )}
-                        {/*{comp === 'ManageExchange' && (
-                            <ManageExchange />
+                        </div>
+                        <center>
+                        {comp === 'IPO' && (
+                            <UserIPO />
                         )}
-                        {comp === 'IPODetails' && (
+                        </center>
+                        {/*{comp === 'IPODetails' && (
                             <IPODetails />
                         )}
                         {comp === 'ImportData' && (
