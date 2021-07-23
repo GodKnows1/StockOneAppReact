@@ -1,9 +1,11 @@
 import React,{useState} from 'react'
 import YourProfile from './User/YourProfile';
 import UserIPO from './User/UserIPO';
+import UserCompany from './User/UserCompany'
+import UserStockExchange from './User/UserStockExchange';
+import UserSector from './User/UserSector';
 
-
-function DashboardUser() {
+function DashboardUser(props) {
     const [comp, setComp] = useState('');
 
     return (
@@ -17,13 +19,15 @@ function DashboardUser() {
                     <div>
                         <button onClick={function () { setComp('IPO') }}>IPOs Tab</button>
                         <span>  </span>
-                        <button>Companies Tab</button>
+                        <button onClick={function () { setComp('Company') }}>Companies Tab</button>
                         <span>  </span>
-                        <button>Sector Tab</button>
+                        <button onClick={function () { setComp('Sector') }}>Sector Tab</button>
                         <span>  </span>
                         <button onClick={function () { setComp('Profile') }}>Your Profile</button>
                         <span>  </span>
-                        <button>Logout</button>
+                        <button onClick={function () { setComp('StockExchanges') }}>Stock Exchanges</button>
+                        <span>  </span>
+                        <button  onClick={function () { window.sessionStorage.clear(); props.history.push('/'); }}>Logout</button>
                     </div>
                     </center><br></br>
                     <div >
@@ -37,12 +41,18 @@ function DashboardUser() {
                             <UserIPO />
                         )}
                         </center>
-                        {/*{comp === 'IPODetails' && (
-                            <IPODetails />
+                        {comp === 'Company' && (
+                            <UserCompany />
                         )}
-                        {comp === 'ImportData' && (
-                            <SheetJSApp />
-                        )} */}
+                        <center>
+                        {comp === 'StockExchanges' && (
+                            <UserStockExchange />
+                        )}
+                        {comp === 'Sector' && (
+                            <UserSector />
+                        )}
+                        </center>
+                        
                     </div>
 
                 </div>

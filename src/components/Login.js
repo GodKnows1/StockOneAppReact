@@ -33,7 +33,7 @@ function Login(props) {
                     props.history.push('/dashboard-admin');
                 } else{
                     window.sessionStorage.setItem("admin","false");
-                    props.history.push('/dashboard-user',{ userName: data.name, password: data.password })
+                    props.history.push('/dashboard-user')
                 }
             } else if(data["response"]){
                 alert("No User Found Fill correct Details");

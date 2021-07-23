@@ -174,8 +174,8 @@ function ManageCompany(props) {
                                 <td>Board of Directors</td>
                                 <td>Sector Name</td>
                                 <td>Turnover</td>
-                                <td><span >Listed In</span> <span>/</span><br></br>Add Exchange</td>
-                                <td>Ops</td>
+                                {/* <td><span >Listed In</span> <span>/</span><br></br>Add Exchange</td> */}
+                                <td>Edit</td>
                                 <td>Delete</td>
                             </tr>
                         </thead>
@@ -190,7 +190,7 @@ function ManageCompany(props) {
                                         <td>{company.boardOfDirectors}</td>
                                         <td>{company.sectorName}</td>
                                         <td>{company.turnover}</td>
-                                        <td style={{ color: 'red' }}>{map}</td>
+                                        {/* <td style={{ color: 'red' }}>{map}</td> */}
                                         <td><button
                                             onClick={
                                                 function () {

@@ -11,6 +11,17 @@ export const loadDataApi= async (url)=> {
     return res.json();
 }
 
+export const loadData2Api= async (url)=> {
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": true,
+        }
+    });
+    return res.text();
+}
+
 export const addDataApi= async (url,model)=> {
     const res = await fetch(url, {
         method: 'POST',

@@ -55,15 +55,15 @@ function UserIPO() {
                     </form>
                     <br />
                 </div>
-                <table style={{ borderSpacing: '10px', border: "solid 3px black" }}>
+                <table style={{border:'2px solid black'}}>
                     <thead >
                         <tr >
-                            <td>Id</td>
-                            <td>Company Name</td>
-                            <td>Price Per Share</td>
-                            <td>Total Shares</td>
-                            <td>Open Date Time</td>
-                            <td>Remarks</td>
+                            <th>Id</th>
+                            <th>Company Name</th>
+                            <th>Price Per Share</th>
+                            <th>Total Shares</th>
+                            <th>Open Date Time</th>
+                            <th>Remarks</th>
                         </tr>
                     </thead>
                     <tbody>

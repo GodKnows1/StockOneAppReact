@@ -16,7 +16,7 @@ function SignUp() {
             "password":password,
             "email":email,
             "mobileNum":mobnumber,
-            "admin":true,
+            "admin":false,
             "confirmed":false
         }
         const res = await fetch('http://localhost:8080/setuserapi', {

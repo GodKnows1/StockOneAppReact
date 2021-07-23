@@ -3,23 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 function YourProfile() {
 
-    const history = useHistory()
-    const [userName, setuserName] = useState(history.location.state.userName);
-    const [password, setpassword] = useState(history.location.state.password);
+    const [userName, setuserName] = useState(window.sessionStorage.getItem("userName"));
+    const [password, setpassword] = useState();
     const [email, setemail] = useState('');
     const [mob, setmob] = useState('');
     const [update, setupdate] = useState(true);
     const [id,setid]=useState(0);
 
     async function LoginApi() {
-        const res = await fetch('http://localhost:8080/getUserByNameAndPass', {
+        const res = await fetch('http://localhost:8080/getUserByName', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "name": userName, "password": password })
+            body: JSON.stringify({ "userName": userName })
         });
         return res.json();
     }
@@ -49,7 +48,7 @@ function YourProfile() {
 
             });
             alert('User updated successfully');
-            setupdate(false);
+            setupdate(true);
         });
 
     }
@@ -59,6 +58,7 @@ function YourProfile() {
             setemail(data.email);
             setmob(data.mobileNum)
             setid(data.id);
+            setpassword(data.password);
         })
     }, []);
     return (
@@ -96,7 +96,7 @@ function YourProfile() {
                 /><br></br>
 
                 <input type="submit" value='Update Information' disabled={(update) ? "disabled" : ""} />
-                <button onClick={function () { setupdate(false); console.log(update) }}>Edit Details&#9998;</button>
+                <button type="button" onClick={function () { setupdate(false); console.log(update) }}>Edit Details&#9998;</button>
             </form>
         </div>
     )
