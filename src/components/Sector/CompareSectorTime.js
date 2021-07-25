@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import ReactFC from 'react-fusioncharts';
-
+import { Row, Col, Button, Container, Form } from 'react-bootstrap'
 let chartConfigs = {
     type: 'column2d',// The chart type
     width: '700', // Width of the chart
@@ -91,16 +91,31 @@ export class CompareSectorTime extends Component {
     render() {
         return (
             <div ><br></br>
-                <h3>Comparing Sector over different Time Period</h3>
-                <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Sector 1" ref='searchInput' />
-                    <span> </span>
-                    <input type="date" className="form-control" placeholder="From Date" ref='date1' />
-                    <span> </span>
-                    <input type="date" className="form-control" placeholder="To Date" ref='date2' /><br></br>
-                    <button className="btn btn-default" type="button" onClick={this.dosearch} > Search</button>
-                </div>
-                <ReactFC {...chartConfigs} />
+            <Container style={{ borderRadius: '8px', padding: '16px', border: '4px solid lightgrey' }}>
+                        <h4>Comparing Sector over different Time Period</h4>
+                        <Form>
+                            <Row >
+                                <Col >
+                                <input type="text" className="form-control" placeholder="Sector 1" ref='searchInput' />
+                                </Col>
+                                <Col>
+                                <input type="date" className="form-control" placeholder="From Date" ref='date1' />
+                                </Col>
+                                <Col>
+                                <input type="date" className="form-control" placeholder="To Date" ref='date2' />
+                                </Col>
+                                <Col xs="1">
+                                <Button  type="button" onClick={this.dosearch} > Search</Button>
+                                </Col>
+                            </Row>
+
+                        </Form>
+                        <br></br>
+                        <center>
+                            <ReactFC {...chartConfigs} />
+                        </center>
+                    </Container>
+                    <br></br>
             </div>
         )
     }

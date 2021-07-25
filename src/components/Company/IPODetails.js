@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Button from '../Button';
+import { Table, Container, Form, Button, FormControl } from 'react-bootstrap';
 import { loadDataApi } from '../EndPoints/Commons';
 
 function IPODetails() {
@@ -93,117 +93,126 @@ function IPODetails() {
         <div>
             <br></br>
             <div>
-                <h3>IPO's List</h3>
-                <table style={{ borderSpacing: '10px', border: "solid 3px black" }}>
-                    <thead >
-                        <tr >
-                            <td>Id</td>
-                            <td>Company Name</td>
-                            <td>Price Per Share</td>
-                            <td>Total Shares</td>
-                            <td>Open Date Time</td>
-                            <td>Remarks</td>
-                            <td>Ops</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            ipos.map(ipo =>
-                                <tr key={ipo.id}>
-                                    <td>{ipo.id}</td>
-                                    <td>{ipo.companyName}</td>
-                                    <td>{ipo.pricePerShare}</td>
-                                    <td>{ipo.totalNumberOfShares}</td>
-                                    <td>{ipo.openDateTime}</td>
-                                    <td>{ipo.remarks}</td>
-                                    <td><button
-                                        onClick={
-                                            function () {
-                                                setcompanyName(ipo.companyName);
-                                                var dateTime = ipo.openDateTime
-                                                const arr = dateTime.split(" ");
-                                                setdate(arr[0]);
-                                                setpriceperShare(ipo.pricePerShare);
-                                                settotShares(ipo.totalNumberOfShares);
-                                                setremarks(ipo.remarks);
-                                                settime(arr[1]);
-                                                setid(ipo.id)
-                                                setUpdate(true)
-                                            }
-                                        } >&#9998;</button></td>
+                <Container>
+                    <center>
+                        <h3>IPO's List</h3>
+                        <Table striped bordered hover size="md" >
+                            <thead >
+                                <tr >
+                                    <td>Id</td>
+                                    <td>Company Name</td>
+                                    <td>Price Per Share</td>
+                                    <td>Total Shares</td>
+                                    <td>Open Date Time</td>
+                                    <td>Remarks</td>
+                                    <td>Ops</td>
                                 </tr>
-                            )
-                        }
-                    </tbody>
-                </table>
-                <br /><br />
+                            </thead>
+                            <tbody>
+                                {
+                                    ipos.map(ipo =>
+                                        <tr key={ipo.id}>
+                                            <td>{ipo.id}</td>
+                                            <td>{ipo.companyName}</td>
+                                            <td>{ipo.pricePerShare}</td>
+                                            <td>{ipo.totalNumberOfShares}</td>
+                                            <td>{ipo.openDateTime}</td>
+                                            <td>{ipo.remarks}</td>
+                                            <td><button
+                                                onClick={
+                                                    function () {
+                                                        setcompanyName(ipo.companyName);
+                                                        var dateTime = ipo.openDateTime
+                                                        const arr = dateTime.split(" ");
+                                                        setdate(arr[0]);
+                                                        setpriceperShare(ipo.pricePerShare);
+                                                        settotShares(ipo.totalNumberOfShares);
+                                                        setremarks(ipo.remarks);
+                                                        settime(arr[1]);
+                                                        setid(ipo.id)
+                                                        setUpdate(true)
+                                                    }
+                                                } >&#9998;</button></td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </Table>
+                    </center>
+                </Container>
 
             </div>
 
             <div>
-                <br></br>
-                <Button
-                    color={toggleAdd ? 'red' : 'green'}
-                    text={update ? 'Update IPO' : (toggleAdd ? 'Close Form' : 'Add Company')}
-                    onClick={function () { settoggleAdd(!toggleAdd); setUpdate(false); clearFields(); }}
-                />
+            <Container><h3>Add IPO</h3></Container>
+                <Container style={{ borderRadius: '8px', padding: '16px', border: '4px solid lightgrey' }}>
                 {toggleAdd ?
                     <div>
-                        <h3>Add Stock IPO</h3>
-                        <form onSubmit={onSubmit}>
-                            <div >
-                                <label>Company Name</label>
-                                <input
-                                    type='text'
-                                    value={companyName}
-                                    onChange={(e) => setcompanyName(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Price Per share</label>
-                                <input
-                                    type='number'
-                                    value={priceperShare}
-                                    onChange={(e) => setpriceperShare(e.target.value)}
-                                />
-                            </div>
+                        <Form onSubmit={onSubmit}>
+                            <Form.Group className="mb-3">
+                                    <Form.Label>Company Name</Form.Label>
+                                    <FormControl
+                                        aria-label="exchange name"
+                                        aria-describedby="basic-addon1"
+                                        value={companyName}
+                                        onChange={(e) => setcompanyName(e.target.value)}
+                                    />
+                                </Form.Group>
 
-                            <div >
-                                <label>Total Shares</label>
-                                <input
-                                    type='number'
-                                    value={totShares}
-                                    onChange={(e) => settotShares(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Open Date</label>
-                                <input
-                                    type='date'
-                                    value={date}
-                                    onChange={(e) => setdate(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Open Time</label>
-                                <input
-                                    type='time'
-                                    value={time}
-                                    onChange={(e) => settime(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Remarks</label>
-                                <input
-                                    type='text'
-                                    value={remarks}
-                                    onChange={(e) => setremarks(e.target.value)}
-                                />
-                            </div>
-                            <input type='submit' value={update ? 'Update IPO' : 'Add IPO'} />
-                        </form>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Price per share</Form.Label>
+                                    <FormControl
+                                     type='number'
+                                        aria-label="price per share"
+                                        aria-describedby="basic-addon1"
+                                        value={priceperShare}
+                                        onChange={(e) => setpriceperShare(e.target.value)}
+                                    />
+                                </Form.Group>
+                                
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Total Shares</Form.Label>
+                                    <FormControl
+                                     type='number'
+                                        aria-describedby="basic-addon1"
+                                        value={totShares}
+                                        onChange={(e) => settotShares(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Open Date</Form.Label>
+                                    <FormControl
+                                     type='date'
+                                        aria-describedby="basic-addon1"
+                                        value={date}
+                                        onChange={(e) => setdate(e.target.value)}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Open Time</Form.Label>
+                                    <FormControl
+                                     type='time'
+                                        aria-describedby="basic-addon1"
+                                        value={time}
+                                        onChange={(e) => settime(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Remarks</Form.Label>
+                                    <FormControl
+                                     type='text'
+                                        aria-describedby="basic-addon1"
+                                        value={remarks}
+                                        onChange={(e) => setremarks(e.target.value)}
+                                    />
+                                </Form.Group>
+                            <Button type='submit' >{update ? 'Update IPO' : 'Add IPO'}</Button>
+                        </Form>
                     </div>
                     : ''}
+                    </Container>
+                    <br></br>
             </div>
         </div>
     )

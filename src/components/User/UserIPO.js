@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Button, Form, FormControl, Row, Col, Table, Container } from 'react-bootstrap';
 import { loadDataApi } from '../EndPoints/Commons';
 
 function UserIPO() {
@@ -36,26 +37,37 @@ function UserIPO() {
         <div>
             <br></br>
             <div>
-                <div>
+                <center>
                     <h3>IPO's List</h3>
-                    <form onSubmit={onSubmit}>
-                        <input type="text" value={companyName}
-                            placeholder="Search For Company"
-                            onChange={(e) => {
-                                setcompanyName(e.target.value)
-                                console.log(e.target.value);
-                                if (e.target.value === "") {
-                                    console.log("hello")
-                                    loadDataApi('http://localhost:8080/getIPOs').then((data) => {
-                                        setipos(data)
-                                    });
-                                }
-                            }} />
-                        <input type="submit" value="Find" />
-                    </form>
-                    <br />
-                </div>
-                <table style={{border:'2px solid black'}}>
+                    <Container>
+                    <Form onSubmit={onSubmit} style={{ width: '20%' }}>
+                        <Row >
+                            <Col xs="9">
+                                <input
+                                    placeholder="Company Name"
+                                    value={companyName}
+                                    onChange={(e) => {
+                                        setcompanyName(e.target.value)
+                                        console.log(e.target.value);
+                                        if (e.target.value === "") {
+                                            console.log("hello")
+                                            loadDataApi('http://localhost:8080/getIPOs').then((data) => {
+                                                setipos(data)
+                                            });
+                                        }
+                                    }} />
+                            </Col>
+                            <Col xs="1">
+                                <Button type="submit" size="sm"> Search</Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                    </Container>
+                </center>
+                <br />
+            </div>
+            <Container>
+                <Table striped bordered hover size="md">
                     <thead >
                         <tr >
                             <th>Id</th>
@@ -81,15 +93,17 @@ function UserIPO() {
                             )
                         }
                     </tbody>
-                </table>
-                <br />
-                <button onClick={() => {
+                </Table>
+            </Container>
+            <br />
+            <center>
+                <Button onClick={() => {
                     loadDataApi('http://localhost:8080/getIPOChronologically').then((data) => {
                         setipos(data)
                     });
-                }}>Show IPO Chronologically</button>
+                }} variant="success">Show IPO Chronologically</Button>
+            </center>
 
-            </div>
         </div>
     )
 }

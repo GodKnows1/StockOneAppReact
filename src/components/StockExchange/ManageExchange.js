@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Button from '../Button'
-import AddEntity from '../SectorPrice/AddEntity';
+import { Container, Form, Table, FormControl,Button } from 'react-bootstrap';
 
 function ManageExchange() {
 
@@ -24,11 +23,11 @@ function ManageExchange() {
     }
 
     async function AddExchange() {
-        const dataModel ={
-            "name":exchangeName,
-            "brief":exchangeBrief,
-            "address":exchangeAdd,
-            "remarks":exchangeRemarks
+        const dataModel = {
+            "name": exchangeName,
+            "brief": exchangeBrief,
+            "address": exchangeAdd,
+            "remarks": exchangeRemarks
         }
         const res = await fetch('http://localhost:8080/addStockExchange', {
             method: 'POST',
@@ -52,7 +51,7 @@ function ManageExchange() {
             alert('Please fill the details')
             return
         }
-        
+
         AddExchange().then((data) => {
             console.log(data);
             loadData().then((data) => {
@@ -73,84 +72,89 @@ function ManageExchange() {
     return (
         <div>
             <br></br>
-                <div>
-                    <h3>Stock Exchange List</h3>
-                    <table style={{ borderSpacing: '10px', border: "solid 3px black" }}>
-                        <thead >
-                            <tr >
-                                <td>Id</td>
-                                <td>Exchange Name</td>
-                                <td>Exchange Brief</td>
-                                <td>Exchange Address</td>
-                                <td>Exchange Remarks</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                exchanges.map(exchange =>
-                                    <tr key={exchange.id}>
-                                        <td>{exchange.id}</td>
-                                        <td>{exchange.name}</td>
-                                        <td>{exchange.brief}</td>
-                                        <td>{exchange.address}</td>
-                                        <td>{exchange.remarks}</td>
-                                    </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                    <br /><br />
+            <div>
+                <Container>
+                    <center>
+                        <h3>Stock Exchange List</h3>
+                        <Table striped bordered hover size="md" >
+                            <thead >
+                                <tr >
+                                    <td>Id</td>
+                                    <td>Exchange Name</td>
+                                    <td>Exchange Brief</td>
+                                    <td>Exchange Address</td>
+                                    <td>Exchange Remarks</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    exchanges.map(exchange =>
+                                        <tr key={exchange.id}>
+                                            <td>{exchange.id}</td>
+                                            <td>{exchange.name}</td>
+                                            <td>{exchange.brief}</td>
+                                            <td>{exchange.address}</td>
+                                            <td>{exchange.remarks}</td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </Table>
+                    </center>
+                </Container>
+                <br /><br />
 
-                </div> 
+            </div>
 
             <div>
+                <Container><h3>Add Stock Exchange</h3></Container>
+                <Container style={{ borderRadius: '8px', padding: '16px', border: '4px solid lightgrey' }}>
+                    {toggleAdd ?
+                        <div>
+                            <Form onSubmit={onSubmit}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Exchange Name</Form.Label>
+                                    <FormControl
+                                        aria-label="exchange name"
+                                        aria-describedby="basic-addon1"
+                                        value={exchangeName}
+                                        onChange={(e) => setexchangeName(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Exchange Brief</Form.Label>
+                                    <FormControl
+                                        aria-label="exchange brief"
+                                        aria-describedby="basic-addon1"
+                                        value={exchangeBrief}
+                                        onChange={(e) => setexchangeBrief(e.target.value)}
+                                    />
+                                    </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Exchange Address</Form.Label>
+                                    <FormControl
+                                        aria-label="exchange address"
+                                        aria-describedby="basic-addon1"
+                                        value={exchangeAdd}
+                                        onChange={(e) => setexchangeAdd(e.target.value)}
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Exchange Remarks</Form.Label>
+                                    <FormControl
+                                        aria-label="exchange brief"
+                                        aria-describedby="basic-addon1"
+                                        value={exchangeRemarks}
+                                        onChange={(e) => setexchangeRemarks(e.target.value)}
+                                    />
+                                </Form.Group>
+                                
+                                <Button type='submit'>Add Exchange</Button>
+                            </Form>
+                        </div>
+                        : ''}
+                </Container>
                 <br></br>
-                <Button
-                    color={toggleAdd ? 'red' : 'green'}
-                    text={toggleAdd ? 'Close Form' : 'Add StockExchange'}
-                    onClick={function () { setToggleAdd(!toggleAdd); clearFields(); }}
-                />
-                {toggleAdd ?
-                    <div>
-                        <h3>Add Stock Exchange</h3>
-                        <form onSubmit={onSubmit}>
-                            <div >
-                                <label>Exchange Name</label>
-                                <input
-                                    type='text'
-                                    value={exchangeName}
-                                    onChange={(e) => setexchangeName(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Exchange Brief</label>
-                                <input
-                                    type='text'
-                                    value={exchangeBrief}
-                                    onChange={(e) => setexchangeBrief(e.target.value)}
-                                />
-                            </div>
-
-                            <div >
-                                <label>Exchange Address</label>
-                                <input
-                                    type='text'
-                                    value={exchangeAdd}
-                                    onChange={(e) => setexchangeAdd(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Exchange Remarks</label>
-                                <input
-                                    type='text'
-                                    value={exchangeRemarks}
-                                    onChange={(e) => setexchangeRemarks(e.target.value)}
-                                />
-                            </div>
-                            <input type='submit' value='Add Exchange' />
-                        </form>
-                    </div>
-                    : ''}
             </div>
         </div>
     )

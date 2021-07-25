@@ -5,6 +5,7 @@ import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import CompareSectorTime from './CompareSectorTime';
+import { Row, Col, Button, Container, Form } from 'react-bootstrap'
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -36,7 +37,7 @@ class CompareSector extends Component {
 
         super(props);
         this.state = chartConfigs;
-        
+
         this.dosearch = this.dosearch.bind(this);
         this.state.dataSource.data = []
     }
@@ -87,20 +88,38 @@ class CompareSector extends Component {
 
     render() {
         return (
-            <div className="App">
-                <h3>Comparision Charts</h3>
-                <div ><br></br>
-                    <h3>Comparing Sectors over a period</h3>
-                    <div className="input-group">
-                        <input type="text" className="form-control" placeholder="Sector 1" ref='searchInput' />
-                        <span> </span>
-                        <input type="date" className="form-control" placeholder="From Date" ref='date1' />
-                        <span> </span>
-                        <input type="date" className="form-control" placeholder="To Date" ref='date2' /><br></br>
-                        <button className="btn btn-default" type="button" onClick={this.dosearch} > Search</button>
-                    </div>
+            <div>
+                <center>
+                    <h3>Comparision Charts</h3>
+                </center>
+                <div >
+                    <Container style={{ borderRadius: '8px', padding: '16px', border: '4px solid lightgrey' }}>
+                        <h4>Comparing Sectors over a period</h4>
+                        <Form>
 
-                    <ReactFC {...chartConfigs} />
+                            <Row >
+                                <Col >
+                                    <input type="text" className="form-control" placeholder="Sector 1" ref='searchInput' />
+                                </Col>
+                                <Col>
+                                    <input type="date" className="form-control" placeholder="From Date" ref='date1' />
+                                </Col>
+                                <Col>
+                                    <input type="date" className="form-control" placeholder="To Date" ref='date2' />
+                                </Col>
+                                <Col xs="1">
+                                    <Button type="button" onClick={this.dosearch} > Search</Button>
+                                </Col>
+                            </Row>
+
+                        </Form>
+                        <br></br>
+                        <center>
+                            <ReactFC {...chartConfigs} />
+                        </center>
+                    </Container>
+                    <br></br>
+                    <center>
                     <label>Compare  More</label><span> </span>
                     <input type="text" ref="moreSector" name="sec" /> <button onClick={() => {
                         const searchval = this.refs.moreSector.value;//get node value or text value
@@ -142,8 +161,9 @@ class CompareSector extends Component {
                         this.refs.moreSector.value = '';
 
                     }}>Add</button>
+                    </center>
                 </div>
-                <CompareSectorTime/>
+                <CompareSectorTime />
             </div>
         )
     }

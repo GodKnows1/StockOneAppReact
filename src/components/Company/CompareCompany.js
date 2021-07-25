@@ -5,6 +5,7 @@ import Charts from 'fusioncharts/fusioncharts.charts';
 import ReactFC from 'react-fusioncharts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import CompanyTime from './CompanyTime'
+import { Form,Row,Col,Button } from 'react-bootstrap';
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -52,6 +53,7 @@ class CompareCompany extends Component {
         super(props);
         this.state = chartConfigs;
         this.dosearch = this.dosearch.bind(this);
+        this.state.dataSource.data = []
     }
 
     dosearch() {
@@ -103,10 +105,10 @@ class CompareCompany extends Component {
                 // prevDs.chart.subCaption = response[0].companycode
                 response.forEach((value, key) => {
                     prevDs.categories[0].category[key] = {
-                        'label': "On "+response[key].datee.substring(0,11)+" at "+response[key].timee,
+                        'label': "On " + response[key].datee.substring(0, 11) + " at " + response[key].timee,
                     };
                 })
-                
+
                 let arr = [];
 
                 response.forEach((value, key) => {
@@ -133,17 +135,44 @@ class CompareCompany extends Component {
             <div className="App">
                 <div>
                     <h3>Comparision Charts</h3>
-                    <div className="input-group">
-                        <h3>Different Companies over a Period</h3>
-                        <input type="text" className="form-control" placeholder="Company Name" ref='searchInput' />
-                        <span> </span>
-                        <input type="text" className="form-control" placeholder="Exchange" ref='searchInput1' /><span> </span>
-                        <button className="btn btn-default" type="button" onClick={this.dosearch} > TBD</button>
+                    <Form style={{ width: '50%' }}>
+                        <Row >
+                            <Col >
+                            <input type="text" className="form-control" placeholder="Company Name" ref='searchInput' />
+                            </Col>
+                            <Col>
+                            <input type="text" className="form-control" placeholder="Exchange" ref='searchInput1' />
+                            </Col>
+                            <Col xs="1">
+                            <Button  type="button" onClick={this.dosearch} > TBD</Button>
+                            </Col>
+                        </Row>
                         <br></br>
-                        <input type="date" className="form-control" placeholder="From Date" ref='date1' />
-                        <span> </span>
-                        <input type="date" className="form-control" placeholder="To Date" ref='date2' /><br></br>
-                        <button className="btn btn-default" type="button" onClick={this.dosearch} > Search</button>
+                        <Row>
+                            <Col>
+                            <input type="date" className="form-control" placeholder="From Date" ref='date1' />
+                            </Col>
+                            <Col>
+                            <input type="date" className="form-control" placeholder="To Date" ref='date2' />
+                            </Col>
+                            <Col xs="1">
+                            <Button type="button" onClick={this.dosearch} > Search</Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                    <div >
+                        
+                        <Form >
+                            
+                            <span> </span>
+                            <span> </span>
+                            
+                            <br></br>
+                            
+                            <span> </span>
+                            
+                            
+                        </Form>
                     </div>
 
                     <ReactFC {...chartConfigs} />
@@ -213,9 +242,9 @@ class CompareCompany extends Component {
                                 ind++;
                             })//nd
                     }}>Go</button> */}
-                </div> 
+                </div>
                 <div>
-                    <h3>Comparing a Company Over Different Time Period </h3>
+                    {/* <h3>Comparing a Company Over Different Time Period </h3> */}
                     {/* <CompanyTime /> */}
                 </div>
             </div>

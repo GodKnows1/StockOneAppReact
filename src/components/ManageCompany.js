@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Button from './Button';
 import { useHistory } from "react-router-dom";
+import { Container, Table, Form, Button, Row, Col, FormControl } from 'react-bootstrap';
 
 
 function ManageCompany(props) {
@@ -17,14 +17,14 @@ function ManageCompany(props) {
     const [ceo, setceo] = useState('');
 
     const [stockExchange, setstockExchange] = useState('');
-    const [comst,setcomst]=useState('');
+    const [comst, setcomst] = useState('');
 
     const [update, setUpdate] = useState(false);
 
     const history = useHistory();
 
     function clearFields() {
-        setturnover(0); setbod(''); setbrief(''); setceo(''); setsector(''); setcompanyName('');setcomst('');setstockExchange('');
+        setturnover(0); setbod(''); setbrief(''); setceo(''); setsector(''); setcompanyName(''); setcomst(''); setstockExchange('');
     }
 
     async function DeleteCompany(name) {
@@ -63,10 +63,10 @@ function ManageCompany(props) {
         return res;
     }
 
-    async function MapCompany(exchange_name,com_name) {
+    async function MapCompany(exchange_name, com_name) {
         const dataModel = {
-            "com_name":exchange_name,
-            "name":com_name
+            "com_name": exchange_name,
+            "name": com_name
         }
         const res = await fetch('http://localhost:8080/mapStockCompany', {
             method: 'POST',
@@ -120,7 +120,7 @@ function ManageCompany(props) {
                 });
             });
         }
-        
+
         clearFields();
     }
 
@@ -161,162 +161,182 @@ function ManageCompany(props) {
     return (
         <div>
             <br></br>
-            
+            <center>
                 <div>
                     <h3>Company List</h3>
-                    <table style={{ borderSpacing: '10px', border: "solid 3px black" }}>
-                        <thead >
-                            <tr >
-                                <td>Id</td>
-                                <td>Company Name</td>
-                                <td>Company Brief</td>
-                                <td>CEO</td>
-                                <td>Board of Directors</td>
-                                <td>Sector Name</td>
-                                <td>Turnover</td>
-                                {/* <td><span >Listed In</span> <span>/</span><br></br>Add Exchange</td> */}
-                                <td>Edit</td>
-                                <td>Delete</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                companies.map(company =>
-                                    <tr key={company.id}>
-                                        <td>{company.id}</td>
-                                        <td>{company.companyName}</td>
-                                        <td>{company.companyBrief}</td>
-                                        <td>{company.ceo}</td>
-                                        <td>{company.boardOfDirectors}</td>
-                                        <td>{company.sectorName}</td>
-                                        <td>{company.turnover}</td>
-                                        {/* <td style={{ color: 'red' }}>{map}</td> */}
-                                        <td><button
-                                            onClick={
-                                                function () {
-                                                    setsector(company.sectorName);
-                                                    setbod(company.boardOfDirectors);
-                                                    setbrief(company.companyBrief);
-                                                    setceo(company.ceo);
-                                                    setturnover(company.turnover);
-                                                    setcompanyName(company.companyName);
-                                                    setid(company.id)
+                    <Container>
+                        <Table striped bordered hover size="md" >
+                            <thead >
+                                <tr >
+                                    <th>Id</th>
+                                    <th>Company Name</th>
+                                    <th>Company Brief</th>
+                                    <th>CEO</th>
+                                    <th>Board of Directors</th>
+                                    <th>Sector Name</th>
+                                    <th>Turnover</th>
+                                    {/* <td><span >Listed In</span> <span>/</span><br></br>Add Exchange</td> */}
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    companies.map(company =>
+                                        <tr key={company.id}>
+                                            <td>{company.id}</td>
+                                            <td>{company.companyName}</td>
+                                            <td>{company.companyBrief}</td>
+                                            <td>{company.ceo}</td>
+                                            <td>{company.boardOfDirectors}</td>
+                                            <td>{company.sectorName}</td>
+                                            <td>{company.turnover}</td>
+                                            {/* <td style={{ color: 'red' }}>{map}</td> */}
+                                            <td><button
+                                                onClick={
+                                                    function () {
+                                                        setsector(company.sectorName);
+                                                        setbod(company.boardOfDirectors);
+                                                        setbrief(company.companyBrief);
+                                                        setceo(company.ceo);
+                                                        setturnover(company.turnover);
+                                                        setcompanyName(company.companyName);
+                                                        setid(company.id)
 
-                                                    setUpdate(true)
-                                                }
-                                            } >&#9998;</button></td>
-                                        <td>
-                                            <button onClick={function () {
-                                                DeleteCompany(company.companyName);
-                                            }}>&times;</button>
-                                        </td>
-                                    </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
+                                                        setUpdate(true)
+                                                    }
+                                                } >&#9998;</button></td>
+                                            <td>
+                                                <button onClick={function () {
+                                                    DeleteCompany(company.companyName);
+                                                }}>&times;</button>
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </Table>
+                    </Container>
                     <br /><br />
-
                 </div>
-            <div>
+            </center>
+            <Container style={{ borderRadius: '8px', padding: '16px', border: '4px solid lightgrey' }}>
                 <br></br>
-                <Button
-                    color={toggleAdd ? 'red' : 'green'}
-                    text={update ? 'Update Company' : (toggleAdd ? 'Close Form' : 'Add Company')}
-                    onClick={function () { setToggleAdd(!toggleAdd); setUpdate(false); clearFields(); }}
-                />
-                {toggleAdd ?
-                    <div>
-                        <h2>{update ? 'Update Company' : 'Add Company'}</h2>
-                        <form onSubmit={onSubmit}>
-                            <div >
-                                <label>Company Name</label>
-                                <input
-                                    type='text'
-                                    value={companyName}
-                                    onChange={(e) => setcompanyName(e.target.value)}
-                                />
+                {/*  */}
+                <div class="row">
+                    <div class="col-sm-6">
+                        {/* <Button
+                            onClick={function () { setToggleAdd(!toggleAdd); setUpdate(false); clearFields(); }}
+                        >{update ? 'Update Company' : (toggleAdd ? 'Close Form' : 'Add Company')}</Button> */}
+                        {toggleAdd ?
+                            <div>
+                                <h3>{update ? 'Update Company' : 'Add Company'}</h3>
+                                <Form onSubmit={onSubmit}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Company Name</Form.Label>
+                                        <FormControl
+                                            aria-label="company name"
+                                            aria-describedby="basic-addon1"
+                                            value={companyName}
+                                            onChange={(e) => setcompanyName(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>CEO</Form.Label>
+                                        <FormControl
+                                            aria-label="company ceo"
+                                            aria-describedby="basic-addon1"
+                                            value={ceo}
+                                            onChange={(e) => setceo(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Turnover</Form.Label>
+                                        <FormControl
+                                            aria-label="company turnover"
+                                            aria-describedby="basic-addon1"
+                                            type='number'
+                                            value={turnover}
+                                            onChange={(e) => setturnover(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Board of Direc.</Form.Label>
+                                        <FormControl
+                                            aria-label="company BOD"
+                                            aria-describedby="basic-addon1"
+                                            type='text'
+                                            value={bod}
+                                            onChange={(e) => setbod(e.target.value)}
+                                        />
+                                    </Form.Group><Form.Group className="mb-3">
+                                        <Form.Label>Brief</Form.Label>
+                                        <FormControl
+                                            aria-label="company brief"
+                                            aria-describedby="basic-addon1"
+                                            type='text'
+                                            value={brief}
+                                            onChange={(e) => setbrief(e.target.value)}
+                                        />
+                                    </Form.Group><Form.Group className="mb-3">
+                                        <Form.Label>Sector Associated With</Form.Label>
+                                        <FormControl
+                                            aria-label="company sector"
+                                            aria-describedby="basic-addon1"
+                                            type='text'
+                                            value={sector}
+                                            onChange={(e) => setsector(e.target.value)}
+                                        />
+                                    </Form.Group>
+
+                                    <Button type='submit' >{update ? 'Update Company' : 'Add Company'}</Button>
+                                </Form>
                             </div>
-                            <div >
-                                <label>CEO</label>
-                                <input
-                                    type='text'
-                                    value={ceo}
-                                    onChange={(e) => setceo(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Turnover</label>
-                                <input
-                                    type='number'
-                                    value={turnover}
-                                    onChange={(e) => setturnover(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Board of Directors</label>
-                                <input
-                                    type='text'
-                                    value={bod}
-                                    onChange={(e) => setbod(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Company Brief</label>
-                                <input
-                                    type='text'
-                                    value={brief}
-                                    onChange={(e) => setbrief(e.target.value)}
-                                />
-                            </div>
-                            <div >
-                                <label>Sector Associated With</label>
-                                <input
-                                    type='text'
-                                    value={sector}
-                                    onChange={(e) => setsector(e.target.value)}
-                                />
-                            </div>
-                            <input type='submit' value={update ? 'Update Company' : 'Add Company'} />
-                        </form>
+                            : ''}
                     </div>
-                    : ''}
-            </div><br /><br />
-            <div>
-                <Button
-                    color={toggleExc ? 'red' : 'green'}
-                    text={!toggleExc ? 'Map Company with Exchange' : 'Close Mapping Form'}
-                    onClick={function () { setToggleExc(!toggleExc); clearFields(); }}
-                />
+                    <div class="col-sm-6">
+                        <div>
+                            {/* <Button
+                                onClick={function () { setToggleExc(!toggleExc); clearFields(); }}
+                            >{!toggleExc ? 'Map Company with Exchange' : 'Close Mapping Form'}</Button> */}
 
-                {toggleExc ?
-                    <div>
-                        <h2>Map Company With Exchange</h2>
-                        <form onSubmit={(e)=>{e.preventDefault();MapCompany(comst,stockExchange)}}>
-                            <div >
-                                <label>Company Name</label>
-                                <input
-                                    type='text'
-                                    value={comst}
-                                    onChange={(e) => setcomst(e.target.value)}
-                                />
-                            </div>
+                            {toggleExc ?
+                                <div>
+                                    <h3>Map Company With Exchange</h3>
+                                    <Form onSubmit={(e) => { e.preventDefault(); MapCompany(comst, stockExchange) }}>
+                                        <Form.Group>
+                                            <Form.Label>Company Name</Form.Label>
+                                            <FormControl
+                                                aria-label="company Name"
+                                                aria-describedby="basic-addon1"
+                                                type='text'
+                                                value={comst}
+                                                onChange={(e) => setcomst(e.target.value)}
+                                            />
+                                        </Form.Group>
 
-                            <div >
-                                <label>Stock Exchange Name</label>
-                                <input
-                                    type='text'
-                                    value={stockExchange}
-                                    onChange={(e) => setstockExchange(e.target.value)}
-                                />
-                            </div>
-                            <input type='submit' value='Map Exchange' />
-                        </form>
+                                        <Form.Group>
+                                            <Form.Label>Exchange Name</Form.Label>
+                                            <FormControl
+                                                aria-label="exchange Name"
+                                                aria-describedby="basic-addon1"
+                                                type='text'
+                                                value={stockExchange}
+                                                onChange={(e) => setstockExchange(e.target.value)}
+                                            />
+                                        </Form.Group>
+                                        <br></br>
+                                        <Button type='submit' >Map Company</Button>
+                                    </Form>
+                                </div>
+                                : ''}
+
+                        </div>
                     </div>
+                </div>
 
-                    : ''}
+            </Container><br /><br />
 
-            </div>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Button, Container, Form, Table } from 'react-bootstrap';
 import CompareCompany from '../Company/CompareCompany';
 import { loadDataApi ,loadData2Api } from '../EndPoints/Commons';
 
@@ -93,9 +94,10 @@ function UserCompany() {
     return (
         <div>
             <center>
+                <br></br>
                 <h3>Companies List</h3>
 
-                <form onSubmit={onSearchByCompanyName}>
+                <Form onSubmit={onSearchByCompanyName}>
                     <input type="text"
                         value={companyName}
                         placeholder="Search Company Name"
@@ -113,10 +115,10 @@ function UserCompany() {
                         }
 
                     /><span> </span>
-                    <input type='submit' value='Search' />
-                </form>
+                    <Button type='submit' variant="info" size="sm">Search</Button>
+                </Form>
 
-                <form >
+                <Form >
                     <input type="text"
                         value={companyCode}
                         placeholder="Search Company Code"
@@ -134,11 +136,13 @@ function UserCompany() {
                         }
 
                     /><span> </span>
-                    <input type='button' value='Search' onClick={()=>SearchLikeCompanyCode(companyCode)} />
-                </form>
+                    <Button type='button' variant="info" size="sm" onClick={()=>SearchLikeCompanyCode(companyCode)} >
+                        Search</Button>
+                </Form>
                 
                 <br></br>
-                <table style={{ border: '2px solid black' }}>
+                <Container>
+                <Table bordered striped hover size="md">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -169,7 +173,8 @@ function UserCompany() {
                             }
                 
                     </tbody>
-                </table><br></br>
+                </Table>
+                </Container>
                 <h3>View Code And Exchange</h3>
                 <form onSubmit={SearchExchangeAndCode}>
                 <input type="text"
@@ -181,11 +186,12 @@ function UserCompany() {
                         }
 
                     /><span> </span>
-                    <input type='submit' value='Search' /><br></br>
+                    <Button size="sm" type='submit' >Search</Button><br></br>
                 </form><br></br>
                 {
                     showTable?
-                    <table style={{ border: '2px solid black' }}>
+                    <Container>
+                    <Table hover striped bordered size="sm">
                         <thead>
                         <tr>
                             <th>EXCHANGES</th>
@@ -193,10 +199,14 @@ function UserCompany() {
                             
                         </tr>
                     </thead>
+                    <tbody>
                         <tr>
-                            <td>{listed}</td><td>{codes}</td>
+                            <td>{listed}</td>
+                            <td>{codes}</td>
                         </tr>
-                    </table>
+                        </tbody>
+                    </Table>
+                    </Container>
                     :''
                 }
                 <br></br>

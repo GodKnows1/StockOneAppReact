@@ -4,54 +4,53 @@ import UserIPO from './User/UserIPO';
 import UserCompany from './User/UserCompany'
 import UserStockExchange from './User/UserStockExchange';
 import UserSector from './User/UserSector';
+import { Nav,Button } from 'react-bootstrap';
 
 function DashboardUser(props) {
     const [comp, setComp] = useState('');
 
     return (
         <div >
-                <hr></hr>
+            <br></br>
                 <center>
                 <h3>User Dashboard</h3>
                 </center>
                 <div>
-                    <center>
-                    <div>
-                        <button onClick={function () { setComp('IPO') }}>IPOs Tab</button>
-                        <span>  </span>
-                        <button onClick={function () { setComp('Company') }}>Companies Tab</button>
-                        <span>  </span>
-                        <button onClick={function () { setComp('Sector') }}>Sector Tab</button>
-                        <span>  </span>
-                        <button onClick={function () { setComp('Profile') }}>Your Profile</button>
-                        <span>  </span>
-                        <button onClick={function () { setComp('StockExchanges') }}>Stock Exchanges</button>
-                        <span>  </span>
-                        <button  onClick={function () { window.sessionStorage.clear(); props.history.push('/'); }}>Logout</button>
-                    </div>
-                    </center><br></br>
+                <Nav justify variant="tabs" defaultActiveKey="manage">
+                    <Nav.Item onClick={function () { setComp('IPO') }}>
+                        <Nav.Link eventKey="ipo" variant="dark" >IPOs</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item  onClick={function () { setComp('Company') }}>
+                        <Nav.Link eventKey="company" variant="light" >Companies</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item onClick={function () { setComp('Sector') }}>
+                        <Nav.Link variant="light" eventKey="sector" >Sectors</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item onClick={function () { setComp('Profile') }}>
+                        <Nav.Link eventKey="profile" variant="light" >Your Profile </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item onClick={function () { setComp('StockExchanges') }}>
+                        <Nav.Link eventKey="exch" variant="light" >Stock Exchanges</Nav.Link>
+                    </Nav.Item>
+                    <Button onClick={()=>{ window.sessionStorage.clear(); props.history.push('/');}}>Logout</Button>
+                </Nav>
+                    
                     <div >
-                        <div id="wrap">
                         {comp === 'Profile' && (
                             <YourProfile />
                         )}
-                        </div>
-                        <center>
                         {comp === 'IPO' && (
                             <UserIPO />
                         )}
-                        </center>
                         {comp === 'Company' && (
                             <UserCompany />
                         )}
-                        <center>
                         {comp === 'StockExchanges' && (
                             <UserStockExchange />
                         )}
                         {comp === 'Sector' && (
                             <UserSector />
                         )}
-                        </center>
                         
                     </div>
 

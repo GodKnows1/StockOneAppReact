@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Form, Button, Table, Container } from 'react-bootstrap';
 import { loadDataApi } from '../EndPoints/Commons';
 import CompareSector from '../Sector/CompareSector';
 
@@ -49,7 +50,7 @@ function UserSector() {
             <center>
                 <h3>Sector List</h3>
 
-                <form onSubmit={onSearchBySectorName}>
+                <Form onSubmit={onSearchBySectorName}>
                     <input type="text"
                         value={SectorName}
                         placeholder="Search Sector By Name"
@@ -65,37 +66,40 @@ function UserSector() {
                         }
                         }
                     /><span> </span>
-                    <input type='submit' value='Search' />
-                </form>
+                    <Button type='submit' size="sm">Search</Button>
+                </Form>
                 <br></br>
-                <table style={{ border: '2px solid black' }}>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>SECTOR NAME</th>
-                            <th>SECTOR BRIEF</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {!single ? (
-                            sectors.map(Sector =>
-                                <tr key={Sector.id}>
-                                    <td>{Sector.id}</td>
-                                    <td>{Sector.sectorName}</td>
-                                    <td>{Sector.brief}</td>
-                                </tr>
-                            )
-                        ) : (<tr key={Sector.id}>
-                            <td>{Sector.id}</td>
-                            <td>{Sector.sectorName}</td>
-                            <td>{Sector.brief}</td>
-                        </tr>)
-                        }
-                    </tbody>
-                </table><br></br>
+                <Container>
+                    <Table hover bordered striped size="md">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>SECTOR NAME</th>
+                                <th>SECTOR BRIEF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {!single ? (
+                                sectors.map(Sector =>
+                                    <tr key={Sector.id}>
+                                        <td>{Sector.id}</td>
+                                        <td>{Sector.sectorName}</td>
+                                        <td>{Sector.brief}</td>
+                                    </tr>
+                                )
+                            ) : (<tr key={Sector.id}>
+                                <td>{Sector.id}</td>
+                                <td>{Sector.sectorName}</td>
+                                <td>{Sector.brief}</td>
+                            </tr>)
+                            }
+                        </tbody>
+                    </Table>
+                </Container>
+                <br></br>
 
 
-                <h3>Search Companies Names In Sector</h3>
+                <h3>Search Companies in a Sector</h3>
                 <form onSubmit={SearchComp}>
                     <input type="text"
                         value={sect}
@@ -107,29 +111,34 @@ function UserSector() {
                     /><span> </span>
                     <input type='submit' value='Search' /><br></br>
                 </form>
-                <br></br>
+
                 {
                     showTable ?
-                        <table style={{ border: '2px solid black' }}>
-                            <thead>
-                                <tr>
-                                    <th>Company Name</th>
-                                </tr>
-                            </thead>
-                            {
-                                comname.map(comp =>
+                        <Container>
+                            <br></br>
+                            <Table style={{ width: '30%' }} hover bordered striped size="sm">
+                                <thead>
                                     <tr>
-                                        <td>{comp}</td>
+                                        <th>Company Name</th>
                                     </tr>
-                                )
-                            }
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {
+                                        comname.map(comp =>
+                                            <tr>
+                                                <td>{comp}</td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </Table>
+                        </Container>
                         : ''
                 }
-
-                <CompareSector/>
                 <br></br>
             </center>
+            <CompareSector />
+
         </div>
     )
 }

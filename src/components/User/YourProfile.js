@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
 
 import { useHistory } from "react-router-dom";
 function YourProfile() {
@@ -24,6 +25,11 @@ function YourProfile() {
     }
 
     async function UpdateUserApi() {
+        if(!userName || !password || !email ||!mob){
+            alert('Fill Your Details');
+            return;
+        }
+        window.sessionStorage.setItem("userName", userName);
         const res = await fetch('http://localhost:8080/updateUser', {
             method: 'PUT',
             headers: {
@@ -62,10 +68,11 @@ function YourProfile() {
         })
     }, []);
     return (
-        <div id="content">
+        <div>
+            <Container style={{width:'20%',padding:'16px'}}>
             <h2>Profile Details</h2>
-            <form onSubmit={onSubmit}>
-                <label for="firstname">Registerd UserName</label><br></br>
+            <Form onSubmit={onSubmit}>
+                <label for="firstname">Username</label><br></br>
                 <input type="text" name="firstname"
                     placeholder="Registerd UserName.."
                     value={userName}
@@ -73,7 +80,7 @@ function YourProfile() {
                     disabled={(update) ? "disabled" : ""}
                 /><br></br>
 
-                <label for="email">Registerd Email-Id</label><br></br>
+                <label for="email">Email-Id</label><br></br>
                 <input type="text"
                     name="email"
                     placeholder="Registerd Email-Id.."
@@ -82,7 +89,7 @@ function YourProfile() {
                     onChange={(e) => setemail(e.target.value)}
                 /><br></br>
 
-                <label for="num">Registerd Mobile Number</label><br></br>
+                <label for="num">Mobile Number</label><br></br>
                 <input type="text" name="num" placeholder="Registerd Mobile Number.."
                     value={mob}
                     disabled={(update) ? "disabled" : ""}
@@ -94,10 +101,11 @@ function YourProfile() {
                     disabled={(update) ? "disabled" : ""}
                     onChange={(e) => setpassword(e.target.value)}
                 /><br></br>
-
-                <input type="submit" value='Update Information' disabled={(update) ? "disabled" : ""} />
-                <button type="button" onClick={function () { setupdate(false); console.log(update) }}>Edit Details&#9998;</button>
-            </form>
+                <br></br>
+                <Button type="submit" size="sm" disabled={(update) ? "disabled" : ""}>Update Information</Button><span> </span>
+                <Button type="button" size="sm" onClick={function () { setupdate(false); console.log(update) }}>&#9998;</Button>
+            </Form>
+            </Container>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Form, Table,Button,Container } from 'react-bootstrap';
 import { loadDataApi } from '../EndPoints/Commons';
 
 function UserStockExchange() {
@@ -27,16 +28,20 @@ function UserStockExchange() {
     return (
         <div>
             <br></br>
+            <center>
                 <div>
+                    <center>
                     <h3>Stock Exchange List</h3>
-                    <table style={{ borderSpacing: '10px', border: "solid 3px black" }}>
+                    </center>
+                    <Container>
+                    <Table hover striped bordered size="sm" style={{width:'80%'}}>
                         <thead >
                             <tr >
-                                <td>Id</td>
-                                <td>Exchange Name</td>
-                                <td>Exchange Brief</td>
-                                <td>Exchange Address</td>
-                                <td>Exchange Remarks</td>
+                                <th>Id</th>
+                                <th>Exchange Name</th>
+                                <th>Exchange Brief</th>
+                                <th>Exchange Address</th>
+                                <th>Exchange Remarks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,10 +57,11 @@ function UserStockExchange() {
                                 )
                             }
                         </tbody>
-                    </table>
+                    </Table>
+                    </Container>
                     <br></br>
-                <h3>View Company in Exchange</h3>
-                <form onSubmit={SearchCompanyInExc}>
+                <h4>View Company in Exchange</h4>
+                <Form onSubmit={SearchCompanyInExc}>
                 <input type="text"
                         value={code}
                         placeholder="Enter Exchange Name"
@@ -64,12 +70,12 @@ function UserStockExchange() {
                             }
                         }
                     /><span> </span>
-                    <input type='submit' value='Search' /><br></br>
-                </form><br></br>
+                    <Button type='submit' size="sm">Search</Button><br></br>
+                </Form><br></br>
                 </div>
               {
                   showTable?
-                  <table style={{ border: '2px solid black' }}>
+                  <Table hove bordered striped size="md" style={{width:'20%'}}>
                       <thead >
                             <tr >
                                 <td><b>Company Name</b></td>
@@ -84,10 +90,11 @@ function UserStockExchange() {
                                 )
                             }
                         </tbody>
-                  </table>
+                  </Table>
                   
                   :''
               }
+              </center>
         </div>
     )
 }

@@ -6,8 +6,8 @@
    - babel.js in-browser transpiler should be loaded before this script
 */
 import React from "react";
+import { Container, Form,Button } from "react-bootstrap";
 import XLSX from "xlsx";
-import Button from "../Button";
 import { addDataApi } from "../EndPoints/Commons";
 
 export default class SheetJSApp extends React.Component {
@@ -22,23 +22,23 @@ export default class SheetJSApp extends React.Component {
     this.uploadShares = this.uploadShares.bind(this);
   }
 
-  uploadShares(){
+  uploadShares() {
     const lists = this.state.data;
     lists.shift();
     // var records=0;
     lists.forEach((list) => {
-      const model={
-        "exchangename":list[1].trim(),
-        "companycode":list[0].trim(),
-        "datee":list[3].trim(),
-        "timee":list[4].trim(),
-        "shareprice":list[2]
-    }
-      addDataApi('http://localhost:8080/addStockprice',model).then((data) => {
-            // records++;
-        });
-  });
-  
+      const model = {
+        "exchangename": list[1].trim(),
+        "companycode": list[0].trim(),
+        "datee": list[3].trim(),
+        "timee": list[4].trim(),
+        "shareprice": list[2]
+      }
+      addDataApi('http://localhost:8080/addStockprice', model).then((data) => {
+        // records++;
+      });
+    });
+
   }
 
   handleFile(file /*:File*/) {
@@ -48,14 +48,14 @@ export default class SheetJSApp extends React.Component {
     reader.onload = e => {
       /* Parse data */
       const bstr = e.target.result;
-      const wb = XLSX.read(bstr, { type: (rABS ? "binary" : "array"),cellDates:true,cellText:false});
+      const wb = XLSX.read(bstr, { type: (rABS ? "binary" : "array"), cellDates: true, cellText: false });
       /* Get first worksheet */
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
       console.log(rABS, wb);
       /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1,raw:false,dateNF:'yyyy-mm-dd'});
-      const res=JSON.stringify(data);
+      const data = XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, dateNF: 'yyyy-mm-dd' });
+      const res = JSON.stringify(data);
       console.log(data);
       /* Update state */
       this.setState({ data: data, cols: make_cols(ws["!ref"]) });
@@ -74,13 +74,12 @@ export default class SheetJSApp extends React.Component {
   render() {
     return (
       <div>
-      <DragDropFile handleFile={this.handleFile}>
-        <div className="row">
-          <div className="col-xs-12">
+        <Container>
+          <DragDropFile handleFile={this.handleFile}>
+
             <DataInput handleFile={this.handleFile} />
-          </div>
-        </div>
-        {/* <div className="row">
+
+            {/* <div className="row">
           <div className="col-xs-12">
             <button
               disabled={!this.state.data.length}
@@ -91,19 +90,15 @@ export default class SheetJSApp extends React.Component {
             </button>
           </div>
         </div> */}
-        <div className="row">
-          <div className="col-xs-12">
             <OutTable data={this.state.data} cols={this.state.cols} />
-          </div>
-        </div>
-      </DragDropFile>
 
-        {/* 
+          </DragDropFile>
+
+          {/* 
           Sending To Server
         */}
-
-<br></br>
-        <Button text='Upload Share prices' color='green' onClick={this.uploadShares}/>
+          <Button onClick={this.uploadShares} >Upload Share Price</Button>
+        </Container>
       </div>
     );
   }
@@ -160,18 +155,27 @@ class DataInput extends React.Component {
   }
   render() {
     return (
-      <form className="form-inline">
-        <div className="form-group">
-          <span><br></br></span><h2>Upload Stock Prices</h2><br></br>
-          <input 
-            type="file"
-            className="form-control"
+
+      <Form >
+        <div>
+          <br></br>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label>Upload Stock Prices</Form.Label>
+            <Form.Control type="file" 
             id="file"
             accept={SheetJSFT}
             onChange={this.handleChange}
-          />
+            />
+          </Form.Group>
+        {/* <h2>Upload Stock Prices</h2><br></br>
+          <input
+            type="file"
+            id="file"
+            accept={SheetJSFT}
+            onChange={this.handleChange}
+          /> */}
         </div>
-      </form>
+      </Form>
     );
   }
 }
@@ -232,7 +236,7 @@ const SheetJSFT = [
   "html",
   "htm"
 ]
-  .map(function(x) {
+  .map(function (x) {
     return "." + x;
   })
   .join(",");

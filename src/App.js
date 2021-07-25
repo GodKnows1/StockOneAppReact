@@ -6,17 +6,27 @@ import SignUp from './components/SignUp';
 import PrivateRoute from './Routes/PrivateRoute';
 import Dashboard from './components/Dashboard';
 import DashboardUser from './components/DashboardUser';
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import { Nav } from 'react-bootstrap';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <div >
-          <div>&nbsp;&nbsp;
-            <NavLink exact to="/">Home</NavLink>&nbsp;&nbsp;
-            <NavLink to="/login">LogIn</NavLink>&nbsp;&nbsp;
-            <NavLink to="/signup">SignUp</NavLink>&nbsp;&nbsp;
-            <NavLink to={window.sessionStorage["admin"]==="true"? "/dashboard-admin":"/dashboard-user"}>DashBoard</NavLink>
+          <div>
+            <Navbar bg="dark"  expand="lg"> 
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Brand ><NavLink exact to="/" style={{textDecoration:'none',marginLeft:'32px'}}>Stock One</NavLink></Navbar.Brand>
+                {/* <NavLink exact to="/">Home</NavLink>&nbsp;&nbsp; */}
+                <Nav className="me-auto">
+                <Nav.Link href="/login"><NavLink style={{textDecoration:'none',color:'#A9A9A9'}} to="/login">LogIn</NavLink></Nav.Link>
+                <Nav.Link href="/signup"><NavLink style={{textDecoration:'none',color:'#A9A9A9'}} to="/signup">SignUp</NavLink></Nav.Link>
+                <Nav.Link><NavLink style={{textDecoration:'none',color:'#A9A9A9'}} to={window.sessionStorage["admin"] === "true" ? "/dashboard-admin" : "/dashboard-user"}>DashBoard</NavLink>
+                </Nav.Link>
+                </Nav>
+            </Navbar>
           </div>
           <div >
             <Switch>
