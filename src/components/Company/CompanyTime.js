@@ -46,7 +46,7 @@ class CompanyTime extends Component {
         // let data = [];
         let dat1 = this.refs.date1.value;
         let dat2 = this.refs.date2.value;
-        let endpoint = `http://127.0.0.1:8080/fetchToAndFrom`;
+        let endpoint = `https://stockoneapp-boot.herokuapp.com/fetchToAndFrom`;
         let myInit1 = {
             method: 'POST',
             headers: {

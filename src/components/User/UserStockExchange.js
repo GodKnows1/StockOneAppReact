@@ -12,14 +12,14 @@ function UserStockExchange() {
     const SearchCompanyInExc=(e)=>{
         e.preventDefault();
         setshowTable(true);
-        loadDataApi(`http://localhost:8080/getCompanyByExchange?name=${code}`).then((data) => {
+        loadDataApi(`https://stockoneapp-boot.herokuapp.com/getCompanyByExchange?name=${code}`).then((data) => {
             console.log(data)
             setcompany(data);
         })
     }
 
     useEffect(() => {
-        loadDataApi('http://localhost:8080/getStockExchanges').then((data) => {
+        loadDataApi('https://stockoneapp-boot.herokuapp.com/getStockExchanges').then((data) => {
             setExchanges(data)
         });
     }, []);

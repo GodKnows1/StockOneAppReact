@@ -34,7 +34,7 @@ export default class SheetJSApp extends React.Component {
         "timee": list[4].trim(),
         "shareprice": list[2]
       }
-      addDataApi('http://localhost:8080/addStockprice', model).then((data) => {
+      addDataApi('https://stockoneapp-boot.herokuapp.com/addStockprice', model).then((data) => {
         // records++;
       });
     });

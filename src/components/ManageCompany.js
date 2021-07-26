@@ -28,7 +28,7 @@ function ManageCompany(props) {
     }
 
     async function DeleteCompany(name) {
-        const res = await fetch(`http://localhost:8080/deleteCompany/${name}`, {
+        const res = await fetch(`https://stockoneapp-boot.herokuapp.com/deleteCompany/${name}`, {
             method: 'DELETE',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -51,7 +51,7 @@ function ManageCompany(props) {
             "companyBrief": brief,
             "sectorName": sector
         }
-        const res = await fetch('http://localhost:8080/updateCompany', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/updateCompany', {
             method: 'PUT',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -68,7 +68,7 @@ function ManageCompany(props) {
             "com_name": exchange_name,
             "name": com_name
         }
-        const res = await fetch('http://localhost:8080/mapStockCompany', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/mapStockCompany', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -90,7 +90,7 @@ function ManageCompany(props) {
             "companyBrief": brief,
             "sectorName": sector
         }
-        const res = await fetch('http://localhost:8080/addCompany', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/addCompany', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -125,7 +125,7 @@ function ManageCompany(props) {
     }
 
     async function loadCompanyInExchange(name) {
-        const res = await fetch(`http://localhost:8080/getListedinExchange/${name}`, {
+        const res = await fetch(`https://stockoneapp-boot.herokuapp.com/getListedinExchange/${name}`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -136,7 +136,7 @@ function ManageCompany(props) {
     }
 
     async function loadData() {
-        const res = await fetch('http://localhost:8080/getCompanies', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/getCompanies', {
             method: 'GET',
             headers: {
                 "Access-Control-Allow-Origin": "*",

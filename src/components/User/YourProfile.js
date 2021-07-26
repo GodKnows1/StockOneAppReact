@@ -12,7 +12,7 @@ function YourProfile() {
     const [id,setid]=useState(0);
 
     async function LoginApi() {
-        const res = await fetch('http://localhost:8080/getUserByName', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/getUserByName', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -30,7 +30,7 @@ function YourProfile() {
             return;
         }
         window.sessionStorage.setItem("userName", userName);
-        const res = await fetch('http://localhost:8080/updateUser', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/updateUser', {
             method: 'PUT',
             headers: {
                 "Access-Control-Allow-Origin": "*",

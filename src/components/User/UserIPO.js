@@ -8,7 +8,7 @@ function UserIPO() {
     const [companyName, setcompanyName] = useState('');
 
     async function GetIPO(comp) {
-        const res = await fetch(`http://localhost:8080/getIPOByCompanyName?companyName=${comp}`, {
+        const res = await fetch(`https://stockoneapp-boot.herokuapp.com/getIPOByCompanyName?companyName=${comp}`, {
             method: 'GET',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -29,7 +29,7 @@ function UserIPO() {
         });
     }
     useEffect(() => {
-        loadDataApi('http://localhost:8080/getIPOs').then((data) => {
+        loadDataApi('https://stockoneapp-boot.herokuapp.com/getIPOs').then((data) => {
             setipos(data)
         });
     }, []);
@@ -51,7 +51,7 @@ function UserIPO() {
                                         console.log(e.target.value);
                                         if (e.target.value === "") {
                                             console.log("hello")
-                                            loadDataApi('http://localhost:8080/getIPOs').then((data) => {
+                                            loadDataApi('https://stockoneapp-boot.herokuapp.com/getIPOs').then((data) => {
                                                 setipos(data)
                                             });
                                         }
@@ -98,7 +98,7 @@ function UserIPO() {
             <br />
             <center>
                 <Button onClick={() => {
-                    loadDataApi('http://localhost:8080/getIPOChronologically').then((data) => {
+                    loadDataApi('https://stockoneapp-boot.herokuapp.com/getIPOChronologically').then((data) => {
                         setipos(data)
                     });
                 }} variant="success">Show IPO Chronologically</Button>

@@ -15,7 +15,7 @@ function UserCompany() {
     const [showTable,setshowTable]=useState(false);
 
 
-    const GET_COMPANIES_API = 'http://localhost:8080/getCompanies';
+    const GET_COMPANIES_API = 'https://stockoneapp-boot.herokuapp.com/getCompanies';
     async function GetCompaniesApi() {
         const res = await fetch(GET_COMPANIES_API, {
             method: 'GET',
@@ -38,7 +38,7 @@ function UserCompany() {
 
 
     async function SearchByCompanyNameApi(c) {
-        const res = await fetch(`http://localhost:8080/likeCompany?name=${c}`, {
+        const res = await fetch(`https://stockoneapp-boot.herokuapp.com/likeCompany?name=${c}`, {
             method: 'GET',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -70,7 +70,7 @@ function UserCompany() {
 
     function SearchLikeCompanyCode (c){
         
-        loadDataApi(`http://localhost:8080/likeCompanyCode?name=${c}`).then((data) => {
+        loadDataApi(`https://stockoneapp-boot.herokuapp.com/likeCompanyCode?name=${c}`).then((data) => {
             setCompanies(data);
             console.log(data);
         });
@@ -79,12 +79,12 @@ function UserCompany() {
     const SearchExchangeAndCode=(e)=>{
         e.preventDefault();
         setshowTable(true);
-        loadDataApi(`http://localhost:8080/getCompanyCode?name=${code}`).then((data) => {
+        loadDataApi(`https://stockoneapp-boot.herokuapp.com/getCompanyCode?name=${code}`).then((data) => {
             // setcodes(data);
             var d="";
             data.forEach(x=>{d=d+" "+x});
             setcodes(d);
-            loadDataApi(`http://localhost:8080/getListedinExchange/${code}`).then((data) => {
+            loadDataApi(`https://stockoneapp-boot.herokuapp.com/getListedinExchange/${code}`).then((data) => {
                 var d="";
                 data.forEach(x=>{d+=x;d+=" "});
                 setlisted(d);

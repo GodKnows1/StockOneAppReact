@@ -16,7 +16,7 @@ function UserSector() {
     const [comname, setcomname] = useState([]);
 
     useEffect(() => {
-        loadDataApi('http://localhost:8080/getSectors').then((data) => {
+        loadDataApi('https://stockoneapp-boot.herokuapp.com/getSectors').then((data) => {
             setsectors(data);
             console.log(data);
 
@@ -30,7 +30,7 @@ function UserSector() {
             return
         }
         setSingle(true);
-        loadDataApi(`http://localhost:8080/getSectorDetailsByName?name=${SectorName}`).then((data) => {
+        loadDataApi(`https://stockoneapp-boot.herokuapp.com/getSectorDetailsByName?name=${SectorName}`).then((data) => {
             if (!data) return;
             setSingle(true);
             setSector(data);
@@ -40,7 +40,7 @@ function UserSector() {
     const SearchComp = (e) => {
         e.preventDefault();
         setshowTable(true);
-        loadDataApi(`http://localhost:8080/getListofCompaniesinSector?sectorName=${sect}`).then((data) => {
+        loadDataApi(`https://stockoneapp-boot.herokuapp.com/getListofCompaniesinSector?sectorName=${sect}`).then((data) => {
             setcomname(data);
         });
     }
@@ -58,7 +58,7 @@ function UserSector() {
                             setSectorName(e.target.value);
                             if (e.target.value === "") {
                                 setSingle(false)
-                                loadDataApi('http://localhost:8080/getSectors').then((data) => {
+                                loadDataApi('https://stockoneapp-boot.herokuapp.com/getSectors').then((data) => {
                                     setsectors(data);
 
                                 });

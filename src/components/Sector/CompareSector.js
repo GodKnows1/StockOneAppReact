@@ -62,7 +62,7 @@ class CompareSector extends Component {
             })
         };
 
-        let endpoint = `http://127.0.0.1:8080/getSectorPriceByPeriod`;
+        let endpoint = `https://stockoneapp-boot.herokuapp.com/getSectorPriceByPeriod`;
 
         //you need to give end slash ony if you call from rest endpint
         fetch(endpoint, myInit1)
@@ -126,7 +126,7 @@ class CompareSector extends Component {
                         const dat1 = this.refs.date1.value;
                         const dat2 = this.refs.date2.value;
 
-                        let endpoint = `http://127.0.0.1:8080/getSectorPriceByPeriod`;
+                        let endpoint = `https://stockoneapp-boot.herokuapp.com/getSectorPriceByPeriod`;
 
                         var myInit1 = {
                             method: 'POST',

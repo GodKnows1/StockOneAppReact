@@ -20,7 +20,7 @@ function SignUp() {
             "admin": false,
             "confirmed": false
         }
-        const res = await fetch('http://localhost:8080/setuserapi', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/setuserapi', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",

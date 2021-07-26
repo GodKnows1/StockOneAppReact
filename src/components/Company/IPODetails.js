@@ -30,7 +30,7 @@ function IPODetails() {
             "openDateTime": date + ' ' + time,
             "companyName": companyName
         }
-        const res = await fetch('http://localhost:8080/updateIPOs', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/updateIPOs', {
             method: 'PUT',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -50,7 +50,7 @@ function IPODetails() {
             "openDateTime": date + ' ' + time,
             "companyName": companyName
         }
-        const res = await fetch('http://localhost:8080/addIPO', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/addIPO', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -67,7 +67,7 @@ function IPODetails() {
         if (update) {
             UpdateIPO().then((data) => {
                 console.log(data);
-                loadDataApi('http://localhost:8080/getIPOs').then((data) => {
+                loadDataApi('https://stockoneapp-boot.herokuapp.com/getIPOs').then((data) => {
                     setipos(data)
                 });
             });
@@ -75,7 +75,7 @@ function IPODetails() {
         } else {
             AddIPO().then((data) => {
                 console.log(data);
-                loadDataApi('http://localhost:8080/getIPOs').then((data) => {
+                loadDataApi('https://stockoneapp-boot.herokuapp.com/getIPOs').then((data) => {
                     setipos(data)
                 });
             });
@@ -84,7 +84,7 @@ function IPODetails() {
     }
 
     useEffect(() => {
-        loadDataApi('http://localhost:8080/getIPOs').then((data) => {
+        loadDataApi('https://stockoneapp-boot.herokuapp.com/getIPOs').then((data) => {
             setipos(data)
         });
     }, []);

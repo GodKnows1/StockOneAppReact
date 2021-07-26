@@ -11,7 +11,7 @@ function ManageExchange() {
     const [exchangeRemarks, setexchangeRemarks] = useState('');
 
     async function loadData() {
-        const res = await fetch('http://localhost:8080/getStockExchanges', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/getStockExchanges', {
             method: 'GET',
             headers: {
                 "Access-Control-Allow-Origin": "*",
@@ -29,7 +29,7 @@ function ManageExchange() {
             "address": exchangeAdd,
             "remarks": exchangeRemarks
         }
-        const res = await fetch('http://localhost:8080/addStockExchange', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/addStockExchange', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",

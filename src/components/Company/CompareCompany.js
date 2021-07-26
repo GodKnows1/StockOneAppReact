@@ -72,10 +72,10 @@ class CompareCompany extends Component {
         let data = [];
         let dat1 = this.refs.date1.value;
         let dat2 = this.refs.date2.value;
-        let endpoint = `http://127.0.0.1:8080/getStockPriceFromCompanyName?companyName=${searchval}`;
+        let endpoint = `https://stockoneapp-boot.herokuapp.com/getStockPriceFromCompanyName?companyName=${searchval}`;
 
         if (dat1 && dat2) {
-            endpoint = `http://127.0.0.1:8080/fetchToAndFrom`;
+            endpoint = `https://stockoneapp-boot.herokuapp.com/fetchToAndFrom`;
             myInit1 = {
                 method: 'POST',
                 headers: {

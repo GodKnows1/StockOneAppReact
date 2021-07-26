@@ -6,7 +6,7 @@ function Login(props) {
     const [password, setpassword] = useState('')
 
     async function LoginApi() {
-        const res = await fetch('http://localhost:8080/getUserByNameAndPass', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/getUserByNameAndPass', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",

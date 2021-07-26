@@ -55,7 +55,7 @@ export class CompareSectorTime extends Component {
             })
         };
 
-        let endpoint = `http://127.0.0.1:8080/getSectorPriceByPeriod`;
+        let endpoint = `https://stockoneapp-boot.herokuapp.com/getSectorPriceByPeriod`;
 
         //you need to give end slash ony if you call from rest endpint
         fetch(endpoint, myInit1)
