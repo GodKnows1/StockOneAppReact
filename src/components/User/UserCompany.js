@@ -22,7 +22,8 @@ function UserCompany() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization":window.sessionStorage.getItem("token")
             }
         });
         return res.json();
@@ -42,7 +43,8 @@ function UserCompany() {
             method: 'GET',
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": true
+                "Access-Control-Allow-Credentials": true,
+                "Authorization":window.sessionStorage.getItem("token")
             }
         });
         return res.json();

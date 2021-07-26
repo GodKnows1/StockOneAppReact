@@ -16,7 +16,8 @@ function ManageExchange() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization":window.sessionStorage.getItem("token")
             }
         });
         return res.json();
@@ -34,7 +35,8 @@ function ManageExchange() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization":window.sessionStorage.getItem("token")
             },
             body: JSON.stringify(dataModel)
         });

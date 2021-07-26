@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Container, Table, Form, Button, Row, Col, FormControl } from 'react-bootstrap';
-
+import {dep1} from './EndPoints/Commons'
 
 function ManageCompany(props) {
 
@@ -28,7 +28,7 @@ function ManageCompany(props) {
     }
 
     async function DeleteCompany(name) {
-        const res = await fetch(`https://stockoneapp-boot.herokuapp.com/deleteCompany/${name}`, {
+        const res = await fetch(`${dep1}/deleteCompany/${name}`, {
             method: 'DELETE',
             headers: {
                 "Access-Control-Allow-Origin": "*",

@@ -53,7 +53,8 @@ class CompareSector extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'Vary': 'Origin'
+                'Vary': 'Origin',
+                "Authorization":window.sessionStorage.getItem("token")
             },
             body: JSON.stringify({
                 "fromdate": dat1,
@@ -133,7 +134,8 @@ class CompareSector extends Component {
                             headers: {
                                 'Content-Type': 'application/json',
                                 'Access-Control-Allow-Origin': '*',
-                                'Vary': 'Origin'
+                                'Vary': 'Origin',
+                                "Authorization":window.sessionStorage.getItem("token")
                             },
                             body: JSON.stringify({
                                 "fromdate": dat1,

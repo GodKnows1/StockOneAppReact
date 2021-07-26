@@ -1,11 +1,17 @@
 import React from 'react'
 
+export const dep1= 'https://stockoneapp-boot.herokuapp.com';
+export const dep2= 'http://localhost:8080';
+
+export const auth="Authorization";
+
 export const loadDataApi= async (url)=> {
     const res = await fetch(url, {
         method: 'GET',
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
+            "Authorization":window.sessionStorage.getItem("token")
         }
     });
     return res.json();
@@ -17,6 +23,7 @@ export const loadData2Api= async (url)=> {
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
+            "Authorization":window.sessionStorage.getItem("token")
         }
     });
     return res.text();
@@ -28,7 +35,8 @@ export const addDataApi= async (url,model)=> {
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            "Authorization":window.sessionStorage.getItem("token")
         },
         body:JSON.stringify(model)
     });
@@ -41,7 +49,8 @@ export const updateDataApi= async (url,model)=> {
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": true,
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            "Authorization":window.sessionStorage.getItem("token")
         },
         body:JSON.stringify(model)
     });

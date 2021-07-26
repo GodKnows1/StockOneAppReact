@@ -6,14 +6,14 @@ function Login(props) {
     const [password, setpassword] = useState('')
 
     async function LoginApi() {
-        const res = await fetch('https://stockoneapp-boot.herokuapp.com/getUserByNameAndPass', {
+        const res = await fetch('https://stockoneapp-boot.herokuapp.com/authenticate', {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ "name": userName, "password": password })
+            body: JSON.stringify({ "username": userName, "password": password })
         });
         return res.json();
     }
@@ -26,10 +26,10 @@ function Login(props) {
             return
         }
         LoginApi().then((data) => {
-            if (!data["response"]) {
-                window.sessionStorage.setItem("userName", data.name);
-                window.sessionStorage.setItem("token", "JWT-Token");
-                if (data.admin === true) {
+            if (data) {
+                window.sessionStorage.setItem("userName", data.usersApp.name);
+                window.sessionStorage.setItem("token", "Bearer "+data.token);
+                if (data.usersApp.admin === true) {
                     window.sessionStorage.setItem("admin", "true");
                     props.history.push('/dashboard-admin');
                 } else {

@@ -13,6 +13,7 @@ function UserIPO() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
+                "Authorization":window.sessionStorage.getItem("token")
             }
         });
         return res.json();

@@ -53,7 +53,6 @@ class CompareCompany extends Component {
         super(props);
         this.state = chartConfigs;
         this.dosearch = this.dosearch.bind(this);
-        this.state.dataSource.data = []
     }
 
     dosearch() {
@@ -62,7 +61,8 @@ class CompareCompany extends Component {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                'Vary': 'Origin'
+                'Vary': 'Origin',
+                "Authorization":window.sessionStorage.getItem("token")
             },
         };
         let searchval = this.refs.searchInput.value;//get node value or text value
@@ -81,7 +81,8 @@ class CompareCompany extends Component {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
-                    'Vary': 'Origin'
+                    'Vary': 'Origin',
+                    "Authorization":window.sessionStorage.getItem("token")
                 },
                 body: JSON.stringify({
                     "fromdate": dat1,

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Row,Container } from 'react-bootstrap';
 import { useHistory } from "react-router-dom";
+import {dep1} from './EndPoints/Commons'
 
 function SignUp() {
 
@@ -20,7 +21,7 @@ function SignUp() {
             "admin": false,
             "confirmed": false
         }
-        const res = await fetch('https://stockoneapp-boot.herokuapp.com/setuserapi', {
+        const res = await fetch(`${dep1}/setuserapi`, {
             method: 'POST',
             headers: {
                 "Access-Control-Allow-Origin": "*",

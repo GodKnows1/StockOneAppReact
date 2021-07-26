@@ -17,7 +17,8 @@ function YourProfile() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization":window.sessionStorage.getItem("token")
             },
             body: JSON.stringify({ "userName": userName })
         });
@@ -35,7 +36,8 @@ function YourProfile() {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": true,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization":window.sessionStorage.getItem("token")
             },
             body: JSON.stringify({ "name": userName, "password": password, "email": email, "mobileNum": mob, "admin": false, "confirmed": true, "id": id })
         });
