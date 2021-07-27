@@ -19,7 +19,8 @@ function SignUp() {
             "email": email,
             "mobileNum": mobnumber,
             "admin": false,
-            "confirmed": false
+            "confirmed": false,
+            "role":"user"
         }
         const res = await fetch(`${dep1}/setuserapi`, {
             method: 'POST',

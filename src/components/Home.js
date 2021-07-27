@@ -29,7 +29,7 @@ function Home() {
 
                         <div class="col-md-4">
                             <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" />
+                                {/* <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" /> */}
                                 <div class="card-body">
                                     <p class="card-text">About the Companies registered under this site their ipos and comparision of share prices over a period and at different time period</p>
                                    
@@ -41,7 +41,7 @@ function Home() {
 
                         <div class="col-md-4">
                             <div class="card mb-4 box-shadow">
-                                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" />
+                                {/* <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap" /> */}
                                 <div class="card-body">
                                     <p class="card-text">You can find the exchanges details companies registered under them and their company code </p>
                                     
