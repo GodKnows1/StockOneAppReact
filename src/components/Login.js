@@ -26,7 +26,6 @@ function Login(props) {
             return
         }
         LoginApi().then((data) => {
-            try {
                 if (data.usersApp.confirmed) {
                     window.sessionStorage.setItem("userName", data.usersApp.name);
                     window.sessionStorage.setItem("token", "Bearer " + data.token);
@@ -38,20 +37,11 @@ function Login(props) {
                         props.history.push('/dashboard-user')
                     }
                 } else if (data.token === "not confirmed") {
-                    alert("No User Found Fill correct Details");
-                } else {
-                    alert("Please Active your account by going to your confirmation mail");
+                    alert("Confirmation mail is pending in inbox");
                 }
-            }
-            catch (err) {
-                <Alert variant="danger">
-                    Wrong username or password
-                </Alert>
-            }
-
-
-
             console.log(data);
+        }).catch((error)=>{
+            <Alert variant="danger">No User Found</Alert>
         });
 
         setuserName('')
