@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Form, FormControl, InputGroup,Button } from 'react-bootstrap';
+import { Container, Form, FormControl, InputGroup, Button, Alert } from 'react-bootstrap';
 
 function Login(props) {
     const [userName, setuserName] = useState('')
@@ -26,36 +26,48 @@ function Login(props) {
             return
         }
         LoginApi().then((data) => {
-            if (data.usersApp.confirmed) {
-                window.sessionStorage.setItem("userName", data.usersApp.name);
-                window.sessionStorage.setItem("token", "Bearer "+data.token);
-                if (data.usersApp.admin === true) {
-                    window.sessionStorage.setItem("admin", "true");
-                    props.history.push('/dashboard-admin');
+            try {
+                if (data.usersApp.confirmed) {
+                    window.sessionStorage.setItem("userName", data.usersApp.name);
+                    window.sessionStorage.setItem("token", "Bearer " + data.token);
+                    if (data.usersApp.admin === true) {
+                        window.sessionStorage.setItem("admin", "true");
+                        props.history.push('/dashboard-admin');
+                    } else {
+                        window.sessionStorage.setItem("admin", "false");
+                        props.history.push('/dashboard-user')
+                    }
+                } else if (data.token === "not confirmed") {
+                    alert("No User Found Fill correct Details");
                 } else {
-                    window.sessionStorage.setItem("admin", "false");
-                    props.history.push('/dashboard-user')
+                    alert("Please Active your account by going to your confirmation mail");
                 }
-            } else if (data.token==="not confirmed") {
-                alert("No User Found Fill correct Details");
-            } else {
-                alert("Please Active your account by going to your confirmation mail");
             }
+            catch (err) {
+                <Alert variant="danger">
+                    Wrong username or password
+                </Alert>
+            }
+
+
+
             console.log(data);
         });
 
         setuserName('')
         setpassword('')
+
     }
+
     return (
         <div >
             <br></br>
             <Container>
-            <h2>Login</h2>
+                <h2>Login</h2>
             </Container>
             <Form onSubmit={onSubmit}>
-                <Container style={{borderRadius: '8px', padding:'16px',border:'4px solid lightgrey'}}>
-                    
+                <Container style={{ borderRadius: '8px', padding: '16px', border: '4px solid lightgrey' }}>
+
                     <Form.Group className="mb-3">
                         <Form.Label>Username</Form.Label>
                         <InputGroup className="mb-3">
@@ -86,8 +98,8 @@ function Login(props) {
                         />
                     </Form.Group>
                     <Button variant="primary" type="submit" value='Login'>
-                    Log In
-                </Button>
+                        Log In
+                    </Button>
                     {/* <label>Username</label>
                     <input
                         type='text'
@@ -107,7 +119,7 @@ function Login(props) {
                         onChange={(e) => setpassword(e.target.value)}
                     />
                 </div> */}
-                
+
             </Form>
         </div>
     )
